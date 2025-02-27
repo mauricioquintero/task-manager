@@ -22,15 +22,18 @@ public class Task {
 
     private String description;
 
-    private LocalDateTime dueDate;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TaskStatus status;
+
+    private LocalDateTime dueDate;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user; // Link to the User entity
 
     @PrePersist
     protected void onCreate() {
