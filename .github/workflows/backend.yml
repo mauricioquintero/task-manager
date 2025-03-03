@@ -1,13 +1,30 @@
+name: Backend CI/CD
+
+on:  # ✅ This tells GitHub when to run the workflow
+  push:
+    branches:
+      - main  # ✅ Runs when code is pushed to the `main` branch
+  pull_request:
+    branches:
+      - main  # ✅ Runs when a pull request targets `main`
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: miq
+          POSTGRES_PASSWORD: 12345
+          POSTGRES_DB: task_manager_db
+        ports:
+          - "5432:5432"
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-
-      - name: Start Docker Services
-        run: docker-compose -f backend/docker-compose.yml up -d
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -16,12 +33,12 @@ jobs:
           java-version: '17'
 
       - name: Wait for Database to Initialize
-        run: sleep 10 # Give PostgreSQL time to start
+        run: sleep 10  # ✅ Gives PostgreSQL time to start
 
       - name: Run Tests
         working-directory: backend
         run: mvn test
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/task_manager_db
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/task_manager_db
           SPRING_DATASOURCE_USERNAME: miq
           SPRING_DATASOURCE_PASSWORD: 12345
