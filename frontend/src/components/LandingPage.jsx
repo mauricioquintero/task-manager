@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import imageSignup from '/src/assets/signup_form.png';
 import imageTasks from '/src/assets/task_list.png';
 
-import { SiSpringboot, SiReact, SiTailwindcss, SiPostgresql } from "react-icons/si";
+import { SiSpringboot, SiReact, SiPostgresql } from "react-icons/si";
 
 export default function LandingPage() {
     return (
@@ -21,7 +21,7 @@ export default function LandingPage() {
                         Get started
                     </Link>
                     <a
-                        href="https://github.com/your-repo-link"
+                        href="https://github.com/mauricioquintero/task-manager"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-6 py-2 outline-2 outline-dracula-purple font-bold text-white rounded-lg
