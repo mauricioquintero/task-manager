@@ -26,12 +26,12 @@ export default function TaskList({ onEdit }) {
     );
 
     return (
-        <div className="max-w-2xl mx-auto mt-10">
-            <h2 className="text-2xl font-bold mb-4 text-center">Task List</h2>
+        <div className="max-w-3xl mx-auto mt-10">
+            <h2 className="text-2xl font-bold mb-4 text-center text-dracula-foreground">Task List</h2>
 
             {/* Filter Dropdown */}
             <div className="mb-4 text-center">
-                <label className="mr-2 font-medium">Filter:</label>
+                <label className="mr-2 font-medium text-dracula-foreground">Filter:</label>
                 <select
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
@@ -51,45 +51,58 @@ export default function TaskList({ onEdit }) {
                     placeholder="Search tasks..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="p-2 border rounded-md w-64"
+                    className="p-2 bg-dracula-foreground rounded-md w-64"
                 />
             </div>
 
-            {/* Task List */}
-            <ul className="bg-white shadow-md rounded-lg overflow-hidden">
-                {filteredTasks.length === 0 ? (
-                    <li className="p-4 text-center text-gray-500">No tasks available</li>
-                ) : (
-                    filteredTasks.map((task) => (
-                        <li key={task.id} className="border-b p-4 flex justify-between items-center">
-                            <div>
-                                <h3 className="font-semibold">{task.title}</h3>
-                                <p className="text-sm text-gray-500">{task.description}</p>
-                                <span className={`px-2 py-1 text-xs font-semibold rounded 
-                  ${task.status === "TODO" ? "bg-red-200 text-red-800" :
-                                    task.status === "IN_PROGRESS" ? "bg-yellow-200 text-yellow-800" :
-                                        "bg-green-200 text-green-800"}`}>
-                  {task.status}
-                </span>
-                            </div>
-                            <div className="space-x-2">
-                                <button
-                                    className="px-3 py-1 text-white bg-blue-500 hover:bg-blue-600 rounded"
-                                    onClick={() => onEdit(task)}
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    className="px-3 py-1 text-white bg-red-500 hover:bg-red-600 rounded"
-                                    onClick={() => handleDelete(task.id)}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        </li>
-                    ))
-                )}
-            </ul>
+            {/* Task List with Scrollable Container */}
+            <div className="bg-dracula-current-line shadow-md rounded-lg overflow-hidden w-full max-w-2xl mx-auto">
+                <ul className="h-[500px] overflow-y-auto">
+                    {filteredTasks.length === 0 ? (
+                        <li className="p-4 text-center text-dracula-foreground">No tasks available</li>
+                    ) : (
+                        filteredTasks.map((task) => (
+                            <li
+                                key={task.id}
+                                className="border-b p-4 flex justify-between items-center space-x-4"
+                            >
+                                {/* Task Info on the Left */}
+                                <div className="w-3/4">
+                                    <h3 className="font-semibold text-dracula-foreground break-words whitespace-normal">
+                                        {task.title}
+                                    </h3>
+                                    <p className="text-sm text-dracula-foreground break-words whitespace-normal">
+                                        {task.description}
+                                    </p>
+                                    <span className={`px-2 py-1 text-xs font-semibold rounded 
+                                    ${task.status === "TODO" ? "outline-2 outline-dracula-red text-dracula-foreground" :
+                                        task.status === "IN_PROGRESS" ? "outline-2 outline-dracula-yellow text-dracula-foreground" :
+                                            "outline-2 outline-dracula-green text-dracula-foreground"}`}>
+                                    {task.status}
+                                </span>
+                                </div>
+
+                                {/* Buttons on the Right (Now in a Row) */}
+                                <div className="space-x-2 flex flex-row items-center">
+                                    <button
+                                        className="px-3 py-1 text-dracula-foreground font-bold outline-2 outline-dracula-purple hover:bg-dracula-foreground hover:outline-dracula-foreground hover:text-dracula-background transition rounded"
+                                        onClick={() => onEdit(task)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className="px-3 py-1 text-white font-bold bg-dracula-red hover:bg-dracula-foreground hover:text-dracula-background rounded transition"
+                                        onClick={() => handleDelete(task.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </li>
+                        ))
+                    )}
+                </ul>
+            </div>
         </div>
     );
+
 }

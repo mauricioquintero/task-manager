@@ -21,15 +21,15 @@ export default function Signup({ setToken }) {
     };
 
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
-            <div className="p-6 bg-white shadow-md rounded-lg">
-                <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
-                {error && <p className="text-red-500 text-center">{error}</p>}
+        <div className="flex justify-center items-center h-screen bg-dracula-background">
+            <div className="p-6 bg-dracula-current-line shadow-md rounded-lg">
+                <h2 className="text-2xl font-bold text-dracula-foreground mb-4 text-center">Sign Up</h2>
+                {error && <p className="text-dracula-red text-center">{error}</p>}
                 <form onSubmit={handleSignup} className="space-y-4">
                     <input
                         type="text"
                         placeholder="Username"
-                        className="w-full p-2 border rounded-md"
+                        className="w-full p-2 rounded-md bg-dracula-foreground"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
@@ -37,12 +37,12 @@ export default function Signup({ setToken }) {
                     <input
                         type="password"
                         placeholder="Password"
-                        className="w-full p-2 border rounded-md"
+                        className="w-full p-2 rounded-md bg-dracula-foreground"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-md">
+                    <button type="submit" className="w-full p-2 bg-dracula-green font-bold text-white rounded-md">
                         Sign Up
                     </button>
                 </form>

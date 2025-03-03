@@ -1,3 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+    --color-dracula-background: #282A36;
+    --color-dracula-current-line: #44475A;
+    --color-dracula-foreground: #F8F8F2;
+    --color-dracula-comment: #6272A4;
+    --color-dracula-cyan: #8BE9FD;
+    --color-dracula-green:#50FA7B;
+    --color-dracula-orange: #FFB86C;
+    --color-dracula-pink: #FF79C6;
+    --color-dracula-purple: #BD93F9;
+    --color-dracula-red: #FF5555;
+    --color-dracula-yellow: #F1FA8C;
+}

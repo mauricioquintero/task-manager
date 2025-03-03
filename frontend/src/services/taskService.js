@@ -17,14 +17,24 @@ export const getTasks = async () => {
     }
 };
 
-export const createTask = async (task) => {
+export const createTask = async (taskData) => {
     try {
-        const response = await axios.post(API_URL, task, {
-            headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+        const token = localStorage.getItem("token"); // Retrieve token from storage
+        if (!token) {
+            throw new Error("No token found. Please log in.");
+        }
+
+        const response = await axios.post(API_URL, taskData, {
+            headers: {
+                Authorization: `Bearer ${token}`, // Attach JWT token
+                "Content-Type": "application/json",
+            },
         });
+
         return response.data;
     } catch (error) {
         console.error("Error creating task:", error);
+        throw error;
     }
 };
 
