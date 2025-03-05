@@ -40,7 +40,7 @@ export const createTask = async (taskData) => {
 
 export const updateTask = async (id, updatedTask) => {
     try {
-        const response = await axios.put(`${API_URL}/${id}`, updatedTask, {
+        const response = await axios.put(`${API_URL}/tasks/${id}`, updatedTask, {
             headers: { "Content-Type": "application/json", ...getAuthHeaders() },
         });
         return response.data;
@@ -51,7 +51,7 @@ export const updateTask = async (id, updatedTask) => {
 
 export const deleteTask = async (id) => {
     try {
-        await axios.delete(`${API_URL}/${id}`, {
+        await axios.delete(`${API_URL}/tasks/${id}`, {
             headers: getAuthHeaders()
         });
     } catch (error) {
