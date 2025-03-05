@@ -9,7 +9,7 @@ const getAuthHeaders = () => {
 
 export const getTasks = async () => {
     try {
-        const response = await axios.get(API_URL, {headers: getAuthHeaders() });
+        const response = await axios.get(`${API_URL}/tasks`, { headers: getAuthHeaders() });
         return response.data;
     } catch (error) {
         console.error("Error fetching tasks:", error);
@@ -19,14 +19,12 @@ export const getTasks = async () => {
 
 export const createTask = async (taskData) => {
     try {
-        const token = localStorage.getItem("token"); // Retrieve token from storage
-        if (!token) {
-            throw new Error("No token found. Please log in.");
-        }
+        const token = localStorage.getItem("token");
+        if (!token) throw new Error("No token found. Please log in.");
 
-        const response = await axios.post(API_URL, taskData, {
+        const response = await axios.post(`${API_URL}/tasks`, taskData, {
             headers: {
-                Authorization: `Bearer ${token}`, // Attach JWT token
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
         });
@@ -55,7 +53,6 @@ export const deleteTask = async (id) => {
             headers: getAuthHeaders()
         });
     } catch (error) {
-        console.error("Error deleting task:", error)
+        console.error("Error deleting task:", error);
     }
 };
-
