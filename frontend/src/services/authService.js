@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export const login = async (username, password) => {
     try {
-        const response = await axios.post(`${API_URL}/login`, { username, password });
+        const response = await axios.post(`${API_URL}/auth/login`, { username, password });
         return response.data.token;
     } catch (error) {
         console.error("Login failed:", error);
@@ -14,7 +14,7 @@ export const login = async (username, password) => {
 
 export const signup = async (username, password) => {
     try {
-        const response = await axios.post(`${API_URL}/signup`, { username, password });
+        const response = await axios.post(`${API_URL}/auth/signup`, { username, password });
         return response.data.token;
     } catch (error) {
         console.error("Signup failed:", error);
